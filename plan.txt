@@ -1,0 +1,71 @@
+C'est compris. Je retire le code brut. Voici le Cahier des Charges Technique & Fonctionnel destiné à Antigravity.
+Ce document est une feuille de route architecturale. Il décrit la logique, la structure des données et les contraintes métier sans donner le code final, laissant Antigravity générer l'implémentation.
+Copie-colle le bloc suivant pour lui :
+
+📋 CAHIER DES CHARGES : ARCHITECTURE "ZERO-COST" PORTFOLIO
+Destinataire : Antigravity (Agent de Développement)
+Rôle : Lead Tech / Architecte Solutions
+Objectif : Construire un site personnel statique, administrable et gratuit, pour un profil "Fullstack Laravel & Data BI".
+
+1. LA STACK TECHNIQUE (Outils Imposés)
+Tu dois utiliser strictement ces technologies pour garantir la gratuité et la performance.
+•	Moteur de Site (SSG) : Jigsaw (basé sur Laravel/Blade).
+•	Design System : Tailwind CSS (v3.x).
+•	Interactivité UI : Alpine.js (via CDN, pour le menu mobile et les micro-animations).
+•	CMS (Admin) : Decap CMS (anciennement Netlify CMS, en mode Git-based).
+•	Hébergement & CI/CD : Netlify (Free Tier).
+•	Formulaires : Netlify Forms (Traitement natif sans backend).
+
+2. STRUCTURE DU PROJET & SYSTÈME DE FICHIERS
+A. Architecture des Dossiers (/source)
+Tu dois structurer le dossier source ainsi :
+1.	_layouts/ : Doit contenir master.blade.php (le squelette HTML global).
+2.	_components/ : Pour les partiels (Navbar, Footer, ProjectCard).
+3.	_assets/ :
+o	css/main.css (Point d'entrée Tailwind).
+o	images/uploads (Dossier cible pour les images uploadées via le CMS).
+4.	admin/ :
+o	Doit contenir index.html (script Decap CMS).
+o	Doit contenir config.yml (Configuration des collections).
+B. Modèle de Données (Collections Jigsaw)
+Dans le fichier de configuration global, déclare deux collections principales :
+1.	Collection projects :
+o	Champs requis : Titre, Date, Catégorie (ex: Startup, Data Science, Freelance), Stack Technique (liste de tags), Image de couverture, Slug, Contenu (Markdown).
+o	Tri : Par date décroissante.
+2.	Collection posts (Blog) :
+o	Champs requis : Titre, Date, Extrait (Excerpt), Image, Contenu (Markdown).
+
+3. DESIGN SYSTEM & UI (Directives Visuelles)
+Palette & Ambiance
+•	Thème : "Clean Tech & Professional".
+•	Couleur Primaire : Slate-900 (Bleu nuit très sombre) → Pour transmettre le sérieux/Data.
+•	Couleur Accent : Indigo-600 (Vibrant) → Référence à l'écosystème Laravel/PHP.
+•	Typographie : "Inter" ou "Plus Jakarta Sans" (Google Fonts).
+Sections Obligatoires (Page d'accueil)
+1.	Hero Section : Centrée. Titre fort sur la double compétence (Dev + Data). Boutons d'appel à l'action (CTA).
+2.	About Section : Layout 2 colonnes (Texte vs Timeline). Doit raconter l'histoire : Électronique → Licence Info → Master BI.
+3.	Skills Grid : Cartes simples. Mettre en avant : Laravel, Python (NLP/CamemBERT), SQL, Git.
+4.	Portfolio Grid : Boucle dynamique sur la collection projects. Affichage en grille (3 colonnes desktop).
+5.	Contact Block : Formulaire simple. Impératif : Ajouter l'attribut data-netlify="true" à la balise <form>.
+
+4. CONTENU & PERSONNALISATION (Données Utilisateur)
+N'utilise pas de "Lorem Ipsum". Injecte les données réelles suivantes dans les fichiers Markdown initiaux ou les vues Blade :
+•	Identité : Développeur Backend Laravel.
+•	Projet Phare 1 (Startup) : "Bimmo Group" (Gestion locative digitale). Stack : Laravel.
+•	Projet Phare 2 (Data) : "Prédiction des élections présidentielles américaines de 2020".
+•	Projet Phare 3 (Freelance) : "CenIX Ecosystem" (Solutions pour supermarchés/restos).
+•	Diplômes : Licence Systèmes Informatiques (Projet HECM/Yerikissi).
+5. LOGIQUE D'ADMINISTRATION (Decap CMS)
+Tu dois configurer le fichier config.yml pour qu'il mappe exactement les dossiers de collection Jigsaw :
+•	Le backend doit être réglé sur git-gateway.
+•	Le media_folder doit pointer vers source/assets/images/uploads.
+•	La collection "Projets" doit permettre de créer/éditer des fichiers .md dans source/_projects.
+•	L'interface doit permettre de sélectionner des images et d'écrire en Markdown enrichi.
+
+6. INSTRUCTIONS DE LIVRAISON
+1.	Génère la structure de dossiers complète.
+2.	Installe les dépendances NPM (Tailwind, Typography plugin).
+3.	Configure le build script (npm run build).
+4.	Assure-toi que le script netlify-identity-widget.js est inclus dans le head du master layout (nécessaire pour le login Admin).
+
+

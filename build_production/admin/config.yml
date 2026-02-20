@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "source/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "projects"
+    label: "Projets"
+    folder: "source/_projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titre (FR)", name: "title", widget: "string"}
+      - {label: "Titre (EN)", name: "title_en", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Catégorie (FR)", name: "category", widget: "string"}
+      - {label: "Catégorie (EN)", name: "category_en", widget: "string"}
+      - {label: "Technologies", name: "stack", widget: "list"}
+      - {label: "Image de couverture", name: "cover_image", widget: "image", required: false}
+      - {label: "Galerie d'images", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Résumé (FR)", name: "excerpt", widget: "text"}
+      - {label: "Résumé (EN)", name: "excerpt_en", widget: "text"}
+      - {label: "Description (FR)", name: "body", widget: "markdown"}
+      - {label: "Description (EN)", name: "body_en", widget: "markdown"}
+      - {label: "URL du site", name: "site_url", widget: "string", required: false}
+      - {label: "URL du code source", name: "source_url", widget: "string", required: false}
+
+  - name: "posts"
+    label: "Articles"
+    folder: "source/_posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Résumé", name: "excerpt", widget: "text"}
+      - {label: "Contenu", name: "body", widget: "markdown"}
