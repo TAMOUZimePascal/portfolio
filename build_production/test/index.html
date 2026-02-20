@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="canonical" href="https://tamou-dev.netlify.app/test">
+        <meta name="description" content="Portfolio de développeur Fullstack Laravel &amp; Data BI">
+        <title>Zimé Pascal TAMOU | Portfolio</title>
+        
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        
+        <!-- Devicon for Tech Stack Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+        
+        <!-- Inline Script for Immediate Theme/Lang Application (Prevents FOUC) -->
+        <script>
+            // Initialize Theme
+            const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            // Initialize Language
+            const lang = localStorage.getItem('lang') || 'fr';
+            document.documentElement.setAttribute('lang', lang);
+        </script>
+
+        <!-- Scripts -->
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=a15f2fcac4ea5bc62e59b20309de18a0">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="/assets/build/js/main.js?id=b3948eb196fc1686f402cdbc63e4ca21"></script>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    </head>
+    <body class="bg-gray-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+        <div id="app" class="flex flex-col min-h-screen">
+            <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
+     @scroll.window="scrolled = (window.pageYOffset > 20)"
+     :class="{ 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm': scrolled, 'bg-transparent': !scrolled }"
+     class="fixed w-full top-0 z-50 transition-all duration-300 border-b border-white/5 dark:border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="/" class="group flex items-center space-x-2">
+                    <span class="text-2xl font-extrabold tracking-tighter bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                        ZPT
+                    </span>
+                    <span class="hidden sm:block text-slate-800 dark:text-slate-200 font-medium text-sm tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-2 group-hover:translate-x-0">
+                        .dev
+                    </span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-1">
+                <template x-for="item in [
+                    { fr: 'Profil', en: 'Profile', href: '#profil' },
+                    { fr: 'Parcours', en: 'Pathway', href: '#parcours' },
+                    { fr: 'Compétences', en: 'Skills', href: '#technologie' },
+                    { fr: 'Projets', en: 'Projects', href: '#projet' },
+                    { fr: 'Contact', en: 'Contact', href: '#contact' }
+                ]">
+                    <a :href="item.href" 
+                       class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                       x-text="$store.app.lang === 'fr' ? item.fr : item.en">
+                    </a>
+                </template>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center space-x-3 ml-4">
+                <div class="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
+                
+                <!-- Language Toggle (Hidden as per user request)
+                <button @click="$store.app.toggleLang()" class="relative group p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <span class="text-xs font-bold tracking-wider" x-text="$store.app.lang.toUpperCase()"></span>
+                    <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-indigo-500 group-hover:w-1/2 transition-all duration-300 -translate-x-1/2"></span>
+                </button>
+                -->
+
+                <!-- Theme Toggle -->
+                <button @click="$store.app.toggleTheme()" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-amber-500 dark:hover:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <svg x-show="$store.app.theme === 'light'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                    <svg x-show="$store.app.theme === 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl"
+         style="display: none;">
+        <div class="px-4 py-6 space-y-4">
+            <template x-for="item in [
+                { fr: 'Profil', en: 'Profile', href: '#profil' },
+                { fr: 'Parcours', en: 'Pathway', href: '#parcours' },
+                { fr: 'Compétences', en: 'Skills', href: '#technologie' },
+                { fr: 'Projets', en: 'Projects', href: '#projet' },
+                { fr: 'Contact', en: 'Contact', href: '#contact' }
+            ]">
+                <a :href="item.href" 
+                   @click="mobileMenuOpen = false"
+                   class="block text-lg font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+                   x-text="$store.app.lang === 'fr' ? item.fr : item.en">
+                </a>
+            </template>
+        </div>
+    </div>
+</nav>
+
+            <main class="flex-1">
+                <h1>Test Build Page</h1>
+<p>If you see this, Jigsaw build is working correctly.</p>
+            </main>
+
+            <footer class="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div class="flex space-x-6">
+                <a href="https://github.com/TAMOUZimePascal" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/zim%C3%A9-pascal-tamou-7bb618251/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="text-center text-sm text-slate-500 dark:text-slate-400" x-text="$store.app.lang === 'fr' ? '© ' + new Date().getFullYear() + ' Zimé Pascal TAMOU. Tous droits réservés.' : '© ' + new Date().getFullYear() + ' Zimé Pascal TAMOU. All rights reserved.'">
+                &copy; 2026 Zimé Pascal TAMOU. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+        </div>
+
+        <script>
+            if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                    });
+                }
+                });
+            }
+        </script>
+    </body>
+</html>
