@@ -754,29 +754,44 @@
                 <p class="text-sm text-slate-600 dark:text-slate-400" x-text="$store.app.lang === 'fr' ? 'Cotonou, Bénin' : 'Cotonou, Benin'">Cotonou, Bénin</p>
             </div>
         </div>
-
-        <form name="contact" method="POST" data-netlify="true" class="bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+<!--
+        <form 
+            x-data="{ 
+                name: '', 
+                email: '', 
+                message: '',
+                sendWhatsApp() {
+                    if(!this.name || !this.message) return;
+                    const phoneNumber = '2290198049044';
+                    const text = `Bonjour, je suis ${this.name} (${this.email}).\n\n${this.message}`;
+                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+                    window.open(url, '_blank');
+                }
+            }"
+            @submit.prevent="sendWhatsApp()"
+            class="bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700"
+        >
             <div class="space-y-6">
                 <div>
                     <label for="name" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" x-text="$store.app.lang === 'fr' ? 'Nom' : 'Name'"></label>
-                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                    <input type="text" name="name" id="name" x-model="name" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
                 </div>
                 
                 <div>
                     <label for="email" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" x-text="$store.app.lang === 'fr' ? 'Email' : 'Email'"></label>
-                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                    <input type="email" name="email" id="email" x-model="email" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
                 </div>
                 
                 <div>
                     <label for="message" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" x-text="$store.app.lang === 'fr' ? 'Message' : 'Message'"></label>
-                    <textarea name="message" id="message" rows="5" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"></textarea>
+                    <textarea name="message" id="message" x-model="message" rows="5" required class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"></textarea>
                 </div>
                 
                 <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-glow transition-all duration-300 transform hover:-translate-y-1" x-text="$store.app.lang === 'fr' ? 'Envoyer le message' : 'Send Message'">
                     Envoyer le message
                 </button>
             </div>
-        </form>
+        </form> -->
     </div>
 </section>
 
